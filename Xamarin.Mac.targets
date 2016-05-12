@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Import this file to reference Xamarin.Mac -->
+  <PropertyGroup>
+    <XamarinMacBinPath Condition="!Exists('$(XamarinMacBinPath)')">/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/bin</XamarinMacBinPath>
+    <BMac Condition="!Exists('$(BMac)')">$(XamarinMacBinPath)/bmac</BMac>
+
+    <XamarinMacLibPath Condition="!Exists('$(XamarinMacLibPath)')">/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib</XamarinMacLibPath>
+    <XamarinMacAssembly Condition="!Exists('$(XamarinMacAssembly)')">$(XamarinMacLibPath)/i386/full/Xamarin.Mac.dll</XamarinMacAssembly>
+
+    <XamarinMacLib Condition="!Exists('$(XamarinMacLib)')">$(XamarinMacLibPath)/libxammac.dylib</XamarinMacLib>
+    <XamarinMacStaticLib Condition="!Exists('$(XamarinMacStaticLib)')">/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/libxammac-debug.a</XamarinMacStaticLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.Mac">
+      <HintPath>$(XamarinMacAssembly)</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(XamarinMacLib)" Condition="'$(DontIncludeLibXammac)'==''">
+      <Link>libxammac.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
